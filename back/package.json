@@ -54,6 +54,7 @@
     "arraybuffer.prototype.slice": "^1.0.4",
     "async-function": "^1.0.0",
     "available-typed-arrays": "^1.0.7",
+    "axios": "^1.8.4",
     "balanced-match": "^1.0.2",
     "bcryptjs": "^3.0.2",
     "brace-expansion": "^2.0.1",
