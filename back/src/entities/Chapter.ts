@@ -5,11 +5,21 @@ import {
     ManyToOne,
     OneToMany,
     CreateDateColumn,
+    UpdateDateColumn,
+    Index,
   } from "typeorm"
   import { Ebook } from "./Ebook"
   import { Section } from "./Section"
   
+  export enum ChapterStatus {
+    DRAFT = "draft",
+    REVIEW = "review",
+    PUBLISHED = "published",
+  }
+  
   @Entity("chapters")
+  @Index(["title"])
+  @Index(["ebook"])
   export class Chapter {
     @PrimaryGeneratedColumn("uuid")
     id: string
@@ -26,11 +36,26 @@ import {
     @Column("text")
     content: string
   
-    @Column()
+    @Column({ default: false })
     generated: boolean
+  
+    @Column({ default: 0 })
+    word_count: number
+  
+    @Column({ type: "enum", enum: ChapterStatus, default: ChapterStatus.DRAFT })
+    status: ChapterStatus
+  
+    @Column({ default: 0 })
+    estimated_read_time: number
+  
+    @Column("jsonb", { nullable: true })
+    metadata: Record<string, any>
   
     @CreateDateColumn()
     created_at: Date
+  
+    @UpdateDateColumn()
+    updated_at: Date
   
     @OneToMany(() => Section, (section) => section.chapter)
     sections: Section[]
