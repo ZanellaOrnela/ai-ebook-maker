@@ -4,6 +4,8 @@ import {
     Column,
     ManyToOne,
     CreateDateColumn,
+    UpdateDateColumn,
+    Index,
   } from "typeorm"
   import { Ebook } from "./Ebook"
   
@@ -15,6 +17,8 @@ import {
   }
   
   @Entity("prompts")
+  @Index(["topic"])
+  @Index(["ebook"])
   export class Prompt {
     @PrimaryGeneratedColumn("uuid")
     id: string
@@ -49,6 +53,21 @@ import {
     @Column()
     include_outro: boolean
   
+    @Column({ type: "decimal", precision: 3, scale: 2, default: 0.7 })
+    temperature: number
+  
+    @Column({ default: 2000 })
+    max_tokens: number
+  
+    @Column({ length: 10, default: "es" })
+    language: string
+  
+    @Column({ default: 1 })
+    version: number
+  
     @CreateDateColumn()
     created_at: Date
+  
+    @UpdateDateColumn()
+    updated_at: Date
   }

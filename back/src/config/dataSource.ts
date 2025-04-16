@@ -1,6 +1,10 @@
 import { DataSource } from "typeorm";
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "./envs";
-// import { User } from "../entities/User";
+import { User } from "../entities/User";
+import { Ebook } from "../entities/Ebook";
+import { Chapter } from "../entities/Chapter";
+import { Section } from "../entities/Section";
+import { Prompt } from "../entities/Prompt";
 // import { Credential } from "../entities/Credential";
 // import { Order } from "../entities/Order";
 // import { Category } from "../entities/Category";
@@ -13,10 +17,10 @@ export const AppDataSource = new DataSource({
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  synchronize: true,
+  synchronize: false,
   // dropSchema: true,
-  logging: false,
-  entities: [],
+  logging: true,
+  entities: [User, Ebook, Chapter, Section, Prompt],
   subscribers: [],
-  migrations: [],
+  migrations: ["src/migrations/*.ts"],
 });
