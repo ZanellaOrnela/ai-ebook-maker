@@ -1,26 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Ebook } from "./ebook.model";
 
-@Entity()
+@Entity("users")
 export class User {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
-  @Column()
-  name: string;
+    @Column()
+    name: string;
 
-  @Column({ unique: true })
-  email: string;
+    @Column({ unique: true })
+    email: string;
 
-  @Column()
-  password: string;
+    @Column()
+    password: string;
 
-  @OneToMany(() => Ebook, ebook => ebook.user)
-  ebooks: Ebook[];
+    @OneToMany(() => Ebook, (ebook) => ebook.user)
+    ebooks: Ebook[];
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 } 
