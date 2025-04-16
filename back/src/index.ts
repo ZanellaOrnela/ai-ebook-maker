@@ -1,11 +1,26 @@
+import 'dotenv/config';
 import express from 'express';
-import dotenv from 'dotenv';
+import cors from 'cors';
+import { AppDataSource } from './data-source';
+import routes from './routes';
 
-dotenv.config();
+const app = express();
 
-const port = process.env.PORT || 3000;
-const server = express();
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-server.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// Rutas
+app.use('/api', routes);
+
+// Iniciar servidor
+const PORT = process.env.PORT || 3000;
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Base de datos conectada');
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => console.log('Error al conectar con la base de datos:', error));

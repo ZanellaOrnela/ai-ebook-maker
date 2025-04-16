@@ -31,7 +31,21 @@ export class EbookService {
   }
 
   async updateEbook(id: string, ebookData: Partial<Ebook>): Promise<Ebook | null> {
-    await this.ebookRepository.update(id, ebookData);
+    // Extraer solo las propiedades que queremos actualizar
+    const { title, description, status, cover_image, language, tags, price, version } = ebookData;
+    
+    // Crear un objeto con solo las propiedades permitidas
+    const updateData: Record<string, unknown> = {};
+    if (title !== undefined) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (status !== undefined) updateData.status = status;
+    if (cover_image !== undefined) updateData.cover_image = cover_image;
+    if (language !== undefined) updateData.language = language;
+    if (tags !== undefined) updateData.tags = tags;
+    if (price !== undefined) updateData.price = price;
+    if (version !== undefined) updateData.version = version;
+    
+    await this.ebookRepository.update(id, updateData);
     return this.getEbookById(id);
   }
 

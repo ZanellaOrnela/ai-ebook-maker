@@ -1,6 +1,9 @@
 import { DataSource } from "typeorm";
-import { User } from "./models/user.model";
-import { Ebook } from "./models/ebook.model";
+import { User } from "./entities/User";
+import { Ebook } from "./entities/Ebook";
+import { Prompt } from "./entities/Prompt";
+import { Chapter } from "./entities/Chapter";
+import { Section } from "./entities/Section";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || "ai_ebook_maker",
   synchronize: true,
   logging: true,
-  entities: [User, Ebook],
+  entities: [User, Ebook, Prompt, Chapter, Section],
   subscribers: [],
   migrations: [],
 }); 
