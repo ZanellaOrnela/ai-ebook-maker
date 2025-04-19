@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
 import { Fredoka, Poppins, Quicksand } from "next/font/google";
 import "./globals.css";
+import "../styles/background.css";
+import "../styles/transitions.css";
+import "../styles/cursor.css";
+import CustomCursor from "@/components/CustomCursor";
 
 const fredoka = Fredoka({
-  weight: "400",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-fredoka",
 });
 
 const poppins = Poppins({
-  weight: ["400", "700"],
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
 });
 
 const quicksand = Quicksand({
-  weight: ["400", "600"],
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-quicksand",
 });
 
 export const metadata: Metadata = {
-  title: "Writealo - Create Ebooks with AI",
-  description: "Create unique and imaginative ebooks with ease using AI",
+  title: "Writealo - Crea ebooks con IA",
+  description: "Crea ebooks únicos y creativos con la ayuda de la IA",
 };
 
 export default function RootLayout({
@@ -31,8 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${poppins.variable} ${quicksand.variable}`}>
-      <body>{children}</body>
+    <html lang="es" className={`${fredoka.variable} ${poppins.variable} ${quicksand.variable}`}>
+      <body className="cursor-none">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }
