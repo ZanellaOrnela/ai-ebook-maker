@@ -1,0 +1,67 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  /* Base crema */
+  background-color: #feedd2;
+
+  /* Capas de gradientes (el primero está por encima) */
+  background-image:
+
+  /* 4) Azul más intenso a la derecha */
+  radial-gradient(
+    circle at 100% 80%,
+    #94CEF2 0%,
+    #94CEF2 10%,
+    transparent 40%
+  ),
+    /* 1) Rosado fuerte en el centro */
+    radial-gradient(
+      circle at 70% 60%,
+      #F2ACBF 0%,
+      #F2ACBF 20%,
+      transparent 70%
+    ),
+    /* 2) Manchón crema esquina superior izquierda */
+    radial-gradient(
+      circle at 15% 10%,
+      #feedd2 0%,
+      transparent 60%
+    ),
+    /* 3) Toque melocotón esquina inferior izquierda */
+    radial-gradient(
+      circle at 20% 85%,
+      #fbc674 0%,
+      transparent 70%
+    );
+
+  /* Configuración del fondo */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+main {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} 
